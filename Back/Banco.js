@@ -1,8 +1,8 @@
 import { Sequelize } from "sequelize";
 
-const banco = new Sequelize('banco1', 'postgres', 'postgrespw', {
+const banco = new Sequelize('postgres', 'postgres', 'ixcsoft6001', {
     host: 'localhost',
-    port: 32768,
+    port: 5432,
     dialect: 'postgres',
     define: {
         timestamps: false,
@@ -11,4 +11,3 @@ const banco = new Sequelize('banco1', 'postgres', 'postgrespw', {
 });
 
 export default banco;
-

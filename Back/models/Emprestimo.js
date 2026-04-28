@@ -36,7 +36,7 @@ const Emprestimo = banco.define(
     }
 );
 
-// 🔗 Relacionamentos
+
 Emprestimo.belongsTo(Exemplar, {
     foreignKey: 'idexemplar'
 });

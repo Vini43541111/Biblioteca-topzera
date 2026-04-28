@@ -1,8 +1,9 @@
 import Express from "express";
 import banco from "./Banco.js";
-import aluno from "./controllers/AlunoController.js";
 import usuario from "./controllers/UsuarioController.js";
 import obra from "./controllers/ObraController.js";
+import exemplar from "./controllers/ExemplarController.js";
+import emprestimo from "./controllers/EmprestimoController.js";
 
 
 try {
@@ -15,15 +16,17 @@ try {
 const api = Express();
 api.use(Express.json());
 
+api.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    if (req.method === 'OPTIONS') return res.sendStatus(200);
+    next();
+});
+
 api.get('/teste', (req, res) => {
     res.send('Api funcionando');
 });
-
-api.get('/aluno', aluno.listar);
-api.get('/aluno/:matricula', aluno.selecionar);
-api.delete('/aluno/:matricula', aluno.excluir);
-api.post('/aluno', aluno.inserir);
-api.put('/aluno/:matricula', aluno.alterar);
 
 api.get('/usuario', usuario.listar);
 api.get('/usuario/:idusuario', usuario.selecionar);
@@ -36,5 +39,17 @@ api.get('/obra/:idobra', obra.selecionar);
 api.delete('/obra/:idobra', obra.excluir);
 api.post('/obra', obra.inserir);
 api.put('/obra/:idobra', obra.alterar);
+
+api.get('/exemplar', exemplar.listar);
+api.get('/exemplar/:idexemplar', exemplar.selecionar);
+api.delete('/exemplar/:idexemplar', exemplar.excluir);
+api.post('/exemplar', exemplar.inserir);
+api.put('/exemplar/:idexemplar', exemplar.alterar);
+
+api.get('/emprestimo', emprestimo.listar);
+api.get('/emprestimo/:idemprestimo', emprestimo.selecionar);
+api.delete('/emprestimo/:idemprestimo', emprestimo.excluir);
+api.post('/emprestimo', emprestimo.inserir);
+api.put('/emprestimo/:idemprestimo', emprestimo.alterar);
 
 api.listen(3000, () => { console.log('Api rodando na porta 3000...') });
