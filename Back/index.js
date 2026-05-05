@@ -1,4 +1,5 @@
 import Express from "express";
+import cors from "cors";
 import banco from "./Banco.js";
 import usuario from "./controllers/UsuarioController.js";
 import obra from "./controllers/ObraController.js";
@@ -15,6 +16,7 @@ try {
 
 const api = Express();
 api.use(Express.json());
+api.use(cors());
 
 api.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -52,4 +54,4 @@ api.delete('/emprestimo/:idemprestimo', emprestimo.excluir);
 api.post('/emprestimo', emprestimo.inserir);
 api.put('/emprestimo/:idemprestimo', emprestimo.alterar);
 
-api.listen(3000, () => { console.log('Api rodando na porta 3000...') });
+api.listen(3001, () => { console.log('Api rodando na porta 3001...') });
